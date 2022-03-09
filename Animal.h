@@ -18,6 +18,30 @@ typedef enum {UNKNOWN_GENDER, MALE, FEMALE} Gender;
 const float UNKNOWN_WEIGHT = -1;
 
 class Animal {
+public:
+    Animal(const std::string &newSpecies);
+
+    Animal(const std::string &newSpecies, Gender newGender);
+
+    Animal(const std::string &newSpecies, Gender newGender, float newWeight);
+
+    Animal(const std::string &newSpecies, float newWeight);
+
+    static const std::string &getKingdom();
+
+    const std::string &getSpecies() const;
+
+    Gender getGender() const;
+
+    void setGender(Gender gender);
+
+    float getWeight() const;
+
+    void setWeight(float weight);
+    //created by clion not me
+    void printInfo();
+
+    bool isValid();
 protected:
     static const std::string kingdom; //forced to animalia and errors if declared here. declared in .cpp
     std::string species; //Required
