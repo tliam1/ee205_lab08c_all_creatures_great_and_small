@@ -10,8 +10,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
-
+#include "Animal.h"
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Animal myFirstAnimal = Animal( "Felis catus" ); //this is the constructor doing its' thing
+    myFirstAnimal.setGender( MALE );
+    myFirstAnimal.setWeight( 19 ); //  Refactor to include Unit of Measure
+    myFirstAnimal.printInfo();
     return 0;
 }

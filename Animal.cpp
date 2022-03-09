@@ -10,6 +10,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "Animal.h"
+
 using namespace std;
 
 const string Animal::kingdom = "Animalia";
@@ -24,15 +25,12 @@ Animal::Animal(const string &newSpecies, Gender newGender) : species(newSpecies)
 }
 
 Animal::Animal(const string &newSpecies, Gender newGender, float newWeight) : species(newSpecies), gender(newGender), weight(newWeight) {
-    Animal::species = newSpecies;
-    Animal::gender = newGender;
-    Animal::weight = newWeight;
+    setWeight(newWeight);
 }
 
 
-Animal::Animal(const string &newSpecies, float newWeight) : species(newSpecies), weight(newWeight) {
-    Animal::species = newSpecies;
-    Animal::weight = newWeight;
+Animal::Animal(const string &newSpecies, float newWeight) : species(newSpecies){
+    setWeight(newWeight);
 }
 
 const string &Animal::getKingdom() {
@@ -55,15 +53,42 @@ float Animal::getWeight() const {
     return weight;
 }
 
-void Animal::setWeight(float weight) {
-    Animal::weight = weight;
+void Animal::setWeight(float newWeight) {
+    if (!validateWeight(newWeight)){
+         throw invalid_argument("Weight must be > 0!");
+    }
+    Animal::weight = newWeight;
 }
 
 void Animal::printInfo() {
-
+    cout<< "Animal Fields" << endl;
+    cout<< "Kingdom = [" << getKingdom() << "]" << endl;
+    cout << "Species = [" << getSpecies() << "]" << endl;
+    cout << "Weight = [" << getWeight() << "]" << endl;
+    cout << "Gender = [" << getGender() << "]" << endl;
 }
 
 bool Animal::isValid() {
+    if (!validateWeight(weight))
+        return false;
+
+    return true;
+}
+
+bool Animal::validateWeight(const float newWeight) {
+    if (newWeight == UNKNOWN_WEIGHT)
+        return true;
+
+    if (newWeight > 0)
+        return true;
+    //not a good number / invalid
     return false;
+}
+
+bool Animal::validateSpecies(const std::string newSpecies) {
+    if (newSpecies.empty())
+        return false;
+
+    return true;
 }
 //for resubmittion

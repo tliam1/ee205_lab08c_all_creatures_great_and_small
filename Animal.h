@@ -13,6 +13,7 @@
 #define EE205_LAB08C_ALL_CREATURES_GREAT_AND_SMALL_ANIMAL_H
 #pragma once
 #include <string>
+#include <iostream>
 
 typedef enum {UNKNOWN_GENDER, MALE, FEMALE} Gender;
 const float UNKNOWN_WEIGHT = -1;
@@ -37,7 +38,7 @@ public:
 
     float getWeight() const;
 
-    void setWeight(float weight);
+    void setWeight(float newWeight);
     //created by clion not me
     void printInfo();
 
@@ -47,6 +48,9 @@ protected:
     std::string species; //Required
     Gender gender = UNKNOWN_GENDER;
     float weight = UNKNOWN_WEIGHT;
+
+    bool validateWeight(const float newWeight);
+    bool validateSpecies(const std::string newSpecies);
 };
 
 
