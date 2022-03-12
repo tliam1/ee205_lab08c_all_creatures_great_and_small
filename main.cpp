@@ -14,7 +14,7 @@
 int main() {
     Animal myFirstAnimal = Animal( "Felis catus" ); //this is the constructor doing its' thing
     myFirstAnimal.setGender( MALE );
-    myFirstAnimal.setWeight( 19 ); //  Refactor to include Unit of Measure
+    myFirstAnimal.setWeight( 19 ); //@todo Refactor to include Unit of Measure
     myFirstAnimal.printInfo();
     return 0;
 }

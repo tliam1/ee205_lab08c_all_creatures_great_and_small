@@ -15,22 +15,23 @@ using namespace std;
 
 const string Animal::kingdom = "Animalia";
 //was added via code>generate>constructor
-Animal::Animal(const string &newSpecies) : species(newSpecies) { //if empty, needs to be marked accordingly
-    Animal::species = newSpecies; //no longer an empty constructor
+Animal::Animal(const string &newSpecies) { //if empty, needs to be marked accordingly
+    setSpecies(newSpecies); //no longer an empty constructor
 }
 
-Animal::Animal(const string &newSpecies, Gender newGender) : species(newSpecies), gender(newGender) {
-    Animal::species = newSpecies;
-    Animal::gender = newGender;
+Animal::Animal(const string &newSpecies, Gender newGender) : gender(newGender) {
+    setSpecies(newSpecies);
 }
 
-Animal::Animal(const string &newSpecies, Gender newGender, float newWeight) : species(newSpecies), gender(newGender), weight(newWeight) {
+Animal::Animal(const string &newSpecies, Gender newGender, float newWeight) : gender(newGender), weight(newWeight) {
     setWeight(newWeight);
+    setSpecies(newSpecies);
 }
 
 
 Animal::Animal(const string &newSpecies, float newWeight) : species(newSpecies){
     setWeight(newWeight);
+    setSpecies(newSpecies);
 }
 
 const string &Animal::getKingdom() {
@@ -45,8 +46,11 @@ Gender Animal::getGender() const {
     return gender;
 }
 
-void Animal::setGender(Gender gender) {
-    Animal::gender = gender;
+void Animal::setGender(Gender newGender) {
+    if (gender != UNKNOWN_GENDER && newGender != UNKNOWN_GENDER)
+        throw logic_error("previous gender must be UNKNOWN_GENDER");
+
+    Animal::gender = newGender;
 }
 
 float Animal::getWeight() const {
@@ -91,4 +95,10 @@ bool Animal::validateSpecies(const std::string newSpecies) {
 
     return true;
 }
-//for resubmittion
+
+void Animal::setSpecies(const std::string newSpecies) {
+    if (!validateSpecies(newSpecies))
+        throw invalid_argument("A species can not be empty");
+
+    species = newSpecies;
+}
